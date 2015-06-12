@@ -42,4 +42,23 @@ describe("Suite", function () {
         expect(this).not.toEqual(window)
         expect(that).toEqual(this); //the global object
     });
-});
+    it("apply", function () {
+        expect(adder.add(1)).toEqual(2);
+        expect(adder.addThruCall(1)).toEqual(2);
+    });
+    it("obj literal", function () {
+        var func = () => ({
+            foo: 1
+        });               // Calling func() returns undefined!
+        expect(func().foo).toEqual(1)
+        var func1 = ()=>(
+        {
+            foo: function () {
+                return 0
+            }
+        }
+        )
+        expect(func1().foo).not.toThrow()
+        expect(func1().foo()).toEqual(0)
+    });
+})
